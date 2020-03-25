@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -22,7 +22,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @ORM\Column(type="string", length=25)
      * @Assert\NotBlank(message="Vous devez saisir un nom d'utilisateur.")
      */
     private $username;
@@ -38,6 +38,11 @@ class User implements UserInterface
      * @Assert\Email(message="Le format de l'adresse n'est pas correcte.")
      */
     private $email;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = ['ROLE_USER'];
 
     public function getId()
     {
@@ -81,7 +86,15 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        //return array('ROLE_USER');
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+        // ROLE_USER or ROLE_ADMIN
+        return $this;
     }
 
     public function eraseCredentials()
