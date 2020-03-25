@@ -49,14 +49,17 @@ class TaskController extends Controller
     /**
      * @Route("/tasks/{id}/edit", name="task_edit")
      */
-    public function editAction(Task $task, Request $request)
+    public function editAction(EntityManagerInterface $em, Request $request, $id)
     {
+        $taskRepository = $this->getDoctrine()->getRepository(Task::class);
+        $task = $taskRepository->findOneBy(array('id' => $id));
+
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
 
             $this->addFlash('success', 'La tâche a bien été modifiée.');
 
