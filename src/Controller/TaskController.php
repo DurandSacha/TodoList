@@ -7,10 +7,10 @@ use App\Form\TaskType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-class TaskController extends Controller
+class TaskController extends AbstractController
 {
     /**
      * @Route("/tasks", name="task_list")
@@ -23,7 +23,7 @@ class TaskController extends Controller
     /**
      * @Route("/tasks/create", name="task_create")
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, EntityManagerInterface $em )
     {
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
@@ -32,8 +32,6 @@ class TaskController extends Controller
 
         if($form->isSubmitted()){
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-
                 $em->persist($task);
                 $em->flush();
 
@@ -44,6 +42,16 @@ class TaskController extends Controller
         }
 
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/tasks/finished", name="task_finished")
+     */
+    public function task_finished()
+    {
+        return $this->render('task/list.html.twig', [
+        ]);
+
     }
 
     /**
