@@ -56,7 +56,7 @@ class TaskController extends AbstractController
     {
         //findAll( array('username' => 'ASC') );
         // TODO: All tasks where is done = 1 ( true )
-        $task = $this->getDoctrine()->getRepository(Task::class)->findAll();
+        $task = $this->getDoctrine()->getRepository(Task::class)->findBy( array('isDone' => true) );
         return $this->render('task/list.html.twig', [
             'tasks' => $task,
         ]);

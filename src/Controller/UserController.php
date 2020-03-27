@@ -12,12 +12,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-
+/**
+ * @Security("is_granted('ROLE_ADMIN')")
+ */
 class UserController extends AbstractController
 {
     /**
      * @Route("/users", name="user_list")
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function listAction()
     {
