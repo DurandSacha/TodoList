@@ -6,6 +6,7 @@ use App\Entity\Task;
 use App\Form\TaskType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,6 +36,7 @@ class TaskController extends AbstractController
 
         if($form->isSubmitted()){
             if ($form->isValid()) {
+                $task->setUser($this->getUser());
                 $em->persist($task);
                 $em->flush();
 
@@ -52,9 +54,12 @@ class TaskController extends AbstractController
      */
     public function task_finished()
     {
+        //findAll( array('username' => 'ASC') );
+        // TODO: All tasks where is done = 1 ( true )
+        $task = $this->getDoctrine()->getRepository(Task::class)->findAll();
         return $this->render('task/list.html.twig', [
+            'tasks' => $task,
         ]);
-
     }
 
     /**
@@ -104,15 +109,27 @@ class TaskController extends AbstractController
      */
     public function deleteTaskAction(EntityManagerInterface $em, $id)
     {
-        //TODO: on ne peut supprimer que sa propre tache // les admin peuvent supprimer leurs taches et les anonymes
         $taskRepository = $this->getDoctrine()->getRepository(Task::class);
         $task = $taskRepository->findOneBy(array('id' => $id));
+        $role = $this->getUser()->getRoles();
 
-        $em->remove($task);
-        $em->flush();
+        if($role[0] == 'ROLE_ADMIN' && $task->getUser() == $this->getUser() || $task->getUser() == null){
 
-        $this->addFlash('success', 'La tâche a bien été supprimée.');
+            $em->remove($task);
+            $em->flush();
+            $this->addFlash('success', 'La tâche a bien été supprimée.');
+        }
+        elseif($role[0] == 'ROLE_USER' && $task->getUser() == $this->getUser()){
 
+            $em->remove($task);
+            $em->flush();
+            $this->addFlash('success', 'La tâche a bien été supprimée.');
+        }
+
+        else{
+            // sinon , impossible de supprimer la tache
+            $this->addFlash('success', 'Action impossible avec vos droits actuel');
+        }
         return $this->redirectToRoute('task_list');
     }
 }

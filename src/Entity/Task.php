@@ -107,4 +107,15 @@ class Task
 
         return $this;
     }
+
+    /**
+     * Is the given User the author of this Post?
+     *
+     * @return bool
+     */
+    public function isAuthor(User $user = null)
+    {
+        return $user && $user->getEmail() === $this->getUser();
+    }
+
 }
