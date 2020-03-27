@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 
 class UserController extends AbstractController
 {
@@ -56,7 +58,7 @@ class UserController extends AbstractController
 
         $form = $this->createForm(UserType::class, $user);
 
-        // TODO: user can Edit a role
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -6,7 +6,7 @@ use App\Entity\Task;
 use App\Form\TaskType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -104,6 +104,7 @@ class TaskController extends AbstractController
      */
     public function deleteTaskAction(EntityManagerInterface $em, $id)
     {
+        //TODO: on ne peut supprimer que sa propre tache // les admin peuvent supprimer leurs taches et les anonymes
         $taskRepository = $this->getDoctrine()->getRepository(Task::class);
         $task = $taskRepository->findOneBy(array('id' => $id));
 
