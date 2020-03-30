@@ -5,9 +5,8 @@
 -----------------
 
 # ToDoList
-========
 
-##presentation
+## presentation
 TodoList is a project for manage a team working. An admin can add a user or other admin, each user/admin can propose a different tasks. It's a teeam work tool. 
 Users and admin can define a task like "done" or "Working"
 
