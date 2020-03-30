@@ -54,8 +54,6 @@ class TaskController extends AbstractController
      */
     public function task_finished()
     {
-        //findAll( array('username' => 'ASC') );
-        // TODO: All tasks where is done = 1 ( true )
         $task = $this->getDoctrine()->getRepository(Task::class)->findBy( array('isDone' => true) );
         return $this->render('task/list.html.twig', [
             'tasks' => $task,
@@ -117,18 +115,18 @@ class TaskController extends AbstractController
 
             $em->remove($task);
             $em->flush();
-            $this->addFlash('success', 'La tâche a bien été supprimée.');
+            $this->addFlash('success', 'Task is deleted');
         }
         elseif($role[0] == 'ROLE_USER' && $task->getUser() == $this->getUser()){
 
             $em->remove($task);
             $em->flush();
-            $this->addFlash('success', 'La tâche a bien été supprimée.');
+            $this->addFlash('success', 'Task is deleted');
         }
 
         else{
             // sinon , impossible de supprimer la tache
-            $this->addFlash('success', 'Action impossible avec vos droits actuel');
+            $this->addFlash('success', 'Impossible with your right');
         }
         return $this->redirectToRoute('task_list');
     }
