@@ -15,6 +15,7 @@
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
 /vendor/
+/ansible/host.ini
 /web/bundles/
 
 ###> symfony/framework-bundle ###

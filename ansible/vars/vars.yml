@@ -1,11 +1,11 @@
 ---
-symfony_root_dir: "/var/www/bilemo"
+symfony_root_dir: "/var/www/todolist"
 symfony_web_dir: "{{ symfony_root_dir }}/public"
 symfony_var_dir: "{{ symfony_root_dir }}/var"
 symfony_console_path: "{{ symfony_root_dir }}/bin/console"
-database_url: "DATABASE_URL=mysql://user1:{{ sql_pass }}@127.0.0.1:3306/bilemo"
+database_url: "DATABASE_URL=mysql://user1:{{ sql_pass }}@127.0.0.1:3306/todolist"
 
-server_name: bilemo.sachadurand.fr
+server_name: todolist.sachadurand.fr
 installer: /tmp/installer.php
 
 symfony_secret: "{{ vault_symfony_secret }}"
