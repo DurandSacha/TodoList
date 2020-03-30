@@ -17,8 +17,6 @@ class UserType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $roles = [];
-
         $builder
             ->add('username', TextType::class, ['label' => "Nom d'utilisateur"])
             ->add('password', RepeatedType::class, [
@@ -36,10 +34,8 @@ class UserType extends AbstractType
                 'choices' => array('I AM USER ' => 'ROLE_USER','I AM ADMIN' => 'ROLE_ADMIN')
             ])
         ;
-
         // Data transformer
-        $builder->get('Roles')
-            ->addModelTransformer(new CallbackTransformer(
+        $builder->get('Roles')->addModelTransformer(new CallbackTransformer(
                 function ($rolesArray) {
                     return count($rolesArray)? $rolesArray[0]: null;
                 },
