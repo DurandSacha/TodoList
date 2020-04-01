@@ -245,19 +245,23 @@
         mode: "a+x"
 
 
-    - name: Delete old Database
-      command: '{{ symfony_console_path }} doctrine:database:drop --force'
+    #- name: Delete old Database
+      #command: '{{ symfony_console_path }} doctrine:database:drop --force'
 
     # Symfony console commands
     - name: Create DB if not exists
       command: '{{ symfony_console_path }} doctrine:database:create --if-not-exists --no-interaction'
 
-    - name: make migration
-      command: '{{ symfony_console_path }} make:migration'
+    - name: Doctrine schema update
+        command: '{{ symfony_console_path }} d:s:u'
+        #when: code_changed
+
+    #- name: make migration
+      #command: '{{ symfony_console_path }} make:migration'
       #when: code_changed
 
-    - name: Execute migrations
-      command: '{{ symfony_console_path }} doctrine:migrations:migrate --no-interaction'
+    #- name: Execute migrations
+      #command: '{{ symfony_console_path }} doctrine:migrations:migrate --no-interaction'
       #when: code_changed
 
     - name: Load data fixtures

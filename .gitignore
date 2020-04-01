@@ -19,7 +19,7 @@
 /web/bundles/
 /symfony.lock
 /composer.lock
-
+/src/Migrations
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
