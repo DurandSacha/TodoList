@@ -13,7 +13,7 @@
         }
     },
     "require": {
-        "php": "7.3.12",
+        "php": "^7.3.12",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "fzaninotto/faker": "^1.9",
         "incenteev/composer-parameter-handler": "^2.0",
