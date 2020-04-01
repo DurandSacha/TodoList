@@ -253,7 +253,7 @@
       command: '{{ symfony_console_path }} doctrine:database:create --if-not-exists --no-interaction'
 
     - name: Doctrine schema update
-        command: '{{ symfony_console_path }} d:s:u'
+      command: '{{ symfony_console_path }} d:s:u --force'
         #when: code_changed
 
     #- name: make migration
@@ -272,6 +272,7 @@
       command: '{{ symfony_console_path }} cache:clear --env={{ symfony_env }}'
       changed_when: false
       when: code_changed
+      notify: Restart Nginx
 
   handlers:
 
