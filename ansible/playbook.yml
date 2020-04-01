@@ -81,27 +81,27 @@
       become: true
       apt:
         name:
-          - php7.4-cli
-          - php7.4-curl
-          - php7.4-fpm
-          - php7.4-intl
-          - php7.4-mbstring
-          - php7.4-mysql
-          - php7.4-xml
+          - php7.3-cli
+          - php7.3-curl
+          - php7.3-fpm
+          - php7.3-intl
+          - php7.3-mbstring
+          - php7.3-mysql
+          - php7.3-xml
         state: latest
       notify: Restart PHP-FPM
 
     - name: Set date.timezone for CLI
       become: true
       lineinfile:
-        dest: /etc/php/7.4/cli/php.ini
+        dest: /etc/php/7.3/cli/php.ini
         regexp: "date.timezone ="
         line: "date.timezone = UTC"
 
     - name: Set date.timezone for FPM
       become: true
       lineinfile:
-        dest: /etc/php/7.4/fpm/php.ini
+        dest: /etc/php/7.3/fpm/php.ini
         regexp: "date.timezone ="
         line: "date.timezone = UTC"
       notify: Restart PHP-FPM
@@ -280,5 +280,5 @@
     - name: Restart PHP-FPM
       become: true
       service:
-        name: php7.4-fpm
+        name: php7.3-fpm
         state: restarted

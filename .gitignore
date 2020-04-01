@@ -17,6 +17,8 @@
 /vendor/
 /ansible/host.ini
 /web/bundles/
+/symfony.lock
+/composer.lock
 
 ###> symfony/framework-bundle ###
 /.env.local
