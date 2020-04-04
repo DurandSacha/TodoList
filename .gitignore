@@ -28,6 +28,8 @@
 /public/bundles/
 /var/
 /vendor/
+/public/data
+/public/data/*
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
