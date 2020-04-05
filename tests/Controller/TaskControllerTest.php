@@ -3,7 +3,9 @@
 namespace App\Tests\Controller;
 
 use App\Tests\baseTest;
+use App\Form\TaskType;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Form\Test\TypeTestCase;
 
 class TaskControllerTest extends baseTest
 {
@@ -19,53 +21,49 @@ class TaskControllerTest extends baseTest
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    /*
-
 
     public function testTaskCreate(){
         $client = $this->login('sacha','000000') ;
         $client->request('GET', '/tasks/create');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
 
     public function testTaskToggle(){
+        // task 2
         $client = $this->login('sacha','000000') ;
-        $client->request('GET', '/tasks/{id}/toggle');
+        $client->request('GET', '/tasks/6/toggle');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
+
+    public function testTaskTogglePOST(){
+        // task 2
+        $client = $this->login('sacha','000000') ;
+        $client->request('POST', '/tasks/6/toggle');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+    }
+
 
     public function testTaskEdit(){
         $client = $this->login('sacha','000000') ;
-        $client->request('GET', '/tasks/{id}/edit');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-    }
-
-    public function testTaskDelete(){
-        $client = $this->login('sacha','000000') ;
-        $client->request('GET', '/tasks/{id}/delete');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-    }
-    */
-}
-
-
-
-/* with form
- *
- *
- *
- * public function testFormCreateActionTask(){
-        $client = $this->login('sacha','000000') ;
-        $crawler = $client->request('GET', '/tasks/create');
-
-        $form = $crawler->selectButton('Ajouter')->form();
-        $form['task[title]'] = 'Task';
-        $form['task[content]'] = 'Symfony rocks!';
-        $crawler = $client->submit($form);
-
-        $client->followRedirect();
+        $client->request('GET', '/tasks/1/edit');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
- */
+
+
+    public function testTaskDelete(){
+        $client = $this->login('louis','000000') ;
+        $client->request('GET', '/tasks/9/delete');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+    }
+
+    public function testTaskDeletePOST(){
+        $client = $this->login('louis','000000') ;
+        $client->request('POST', '/tasks/9/delete');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+    }
+
+
+
+}

@@ -28,6 +28,7 @@
                 <directory>tests</directory>
                 <directory suffix=".php">src/migrations</directory>
                 <directory suffix=".php">src/DataFixtures</directory>
+                <directory suffix=".php">src/Reposirory</directory>
                 <file>src/kernel</file>
             </exclude>
         </whitelist>
