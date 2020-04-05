@@ -2,6 +2,7 @@
 
 namespace App\Tests\Entity;
 
+use App\Entity\Task;
 use App\Entity\User;
 use App\Tests\BaseTest;
 use PHPUnit\Framework\TestCase;
@@ -24,17 +25,20 @@ class UserTest extends TestCase
 
     public function testRole()
     {
-        $this->user->setsetRoles(['ROLE_USER']);
-        $this->assertEquals(['ROLE_USER'], $this->user->getUsername());
+        $role = ['ROLE_USER'];
+        $this->user->setRoles($role);
+        $this->assertEquals($role, $this->user->getRoles());
     }
 
     /*
     public function testTask()
     {
-        $this->user->getTasks();
-        //$this->assertTrue($client->getResponse()->isSuccessful());
+        $task = new Task();
+        $this->user->addTask($task);
+        $this->assertEquals($task, $this->user->getTasks());
     }
     */
+
 
     public function testEmail()
     {

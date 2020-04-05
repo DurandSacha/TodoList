@@ -27,4 +27,11 @@ class TaskTest extends TestCase
         $this->task->setContent('Fixtures content');
         $this->assertEquals('Fixtures content', $this->task->getContent());
     }
+
+    public function testCreatedAt()
+    {
+        $date = new \Datetime();
+        $this->task->setCreatedAt($date);
+        $this->assertEquals($date, $this->task->getCreatedAt());
+    }
 }
