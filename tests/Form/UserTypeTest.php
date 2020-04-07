@@ -90,7 +90,7 @@ class UserTypeTest extends BaseTest
         $form['user[email]'] = 'UserTestEdit@gmail.com';
         $form['user[Roles]'] = 'ROLE_USER';
         $client->submit($form);
-        
+
         $this->assertTrue($client->getResponse()->isSuccessful());
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
