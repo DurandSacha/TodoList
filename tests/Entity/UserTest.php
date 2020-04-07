@@ -17,6 +17,7 @@ class UserTest extends TestCase
         $this->user = new User();
     }
 
+
     public function testUsername()
     {
         $this->user->setUsername('hello');

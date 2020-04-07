@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserControllerTest extends baseTest
 {
+
+
     public function testAdminListUser(){
         $client = $this->login('sacha','000000') ;
         $client->request('GET', '/users');
