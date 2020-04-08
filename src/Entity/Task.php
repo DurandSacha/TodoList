@@ -56,6 +56,11 @@ class Task
         return $this->id;
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -106,16 +111,6 @@ class Task
         $this->User = $User;
 
         return $this;
-    }
-
-    /**
-     * Is the given User the author of this Post?
-     *
-     * @return bool
-     */
-    public function isAuthor(User $user = null)
-    {
-        return $user && $user->getEmail() === $this->getUser();
     }
 
 }

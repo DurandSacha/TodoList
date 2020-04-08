@@ -36,11 +36,30 @@ class TaskControllerTest extends baseTest
         return $result;
     }
 
+    private function searchTasksDone()
+    {
+        $result = $this->entityManager
+            ->getRepository(Task::class)
+            ->findOneBy(array('isDone' => 1));
+
+        $this->entityManager->close();
+        return $result;
+    }
+
     public function testTaskToggle(){
         // task 2
 
         $client = $this->login('sacha','000000') ;
         $client->request('GET', '/tasks/'.$this->searchTasks()->getId().'/toggle');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+    }
+
+    public function testTaskToggleDone(){
+        // task 2
+
+        $client = $this->login('sacha','000000') ;
+        $client->request('GET', '/tasks/'.$this->searchTasksDone()->getId().'/toggle');
+        $client->request('GET', '/tasks/'.$this->searchTasksDone()->getId().'/toggle');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 

@@ -14,7 +14,7 @@ class UserTest extends TestCase
 
     public function setUp()
     {
-        $this->user = new User();
+        $user = $this->user = new User();
     }
 
 
@@ -31,11 +31,25 @@ class UserTest extends TestCase
         $this->assertEquals($role, $this->user->getRoles());
     }
 
+    public function testId()
+    {
+        $this->user->setId(1);
+        $this->assertEquals(1, $this->user->getId());
+    }
+
     /*
     public function testTask()
     {
+        // test addTask // getTasks // removeTask
+        $user = new User();
+
         $task = new Task();
-        $this->user->addTask($task);
+        $task2 = new Task();
+
+        $tasks = [$task,$task2];
+
+        $this->user->addTask($tasks);
+        dd($this->user->getTasks());
         $this->assertEquals($task, $this->user->getTasks());
     }
     */

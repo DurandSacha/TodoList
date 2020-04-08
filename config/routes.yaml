@@ -6,3 +6,12 @@ app:
   resource: "../src/Controller/"
   type:     annotation
 
+logout:
+  path: /logout
+  methods: GET
+
+login_check:
+  path: /login_check
+  methods: POST
+
+

@@ -22,6 +22,12 @@ class TaskTest extends TestCase
         $this->assertEquals('Fixtures', $this->task->getTitle());
     }
 
+    public function testId()
+    {
+        $this->task->setId(1);
+        $this->assertEquals(1, $this->task->getId());
+    }
+
     public function testContent()
     {
         $this->task->setContent('Fixtures content');

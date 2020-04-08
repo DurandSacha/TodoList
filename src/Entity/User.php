@@ -61,6 +61,11 @@ class User implements UserInterface
         return $this->id;
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
     public function getUsername()
     {
         return $this->username;
@@ -113,9 +118,13 @@ class User implements UserInterface
     {
     }
 
+    /*
+
     /**
      * @return Collection|Task[]
      */
+
+    /*
     public function getTasks(): Collection
     {
         return $this->tasks;
@@ -143,4 +152,5 @@ class User implements UserInterface
 
         return $this;
     }
+    */
 }

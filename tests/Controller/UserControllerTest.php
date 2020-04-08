@@ -26,4 +26,11 @@ class UserControllerTest extends baseTest
         $client->request('POST', '/users/create');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
+
+    /*
+    public function testUserAddTaskAnsRemoveTask(){
+        $client = $this->login('sacha','000000') ;
+        $client->request('POST', '/users/create');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }*/
 }
