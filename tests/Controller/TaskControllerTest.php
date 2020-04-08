@@ -3,6 +3,7 @@
 namespace App\Tests\Controller;
 
 use App\Entity\Task;
+use App\Entity\User;
 use App\Tests\baseTest;
 use App\Form\TaskType;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -46,8 +47,51 @@ class TaskControllerTest extends baseTest
         return $result;
     }
 
+
+    public function testTaskDeleteWithUserROLE(){
+        $client = $this->login('Louis','000000') ;
+
+        $user = $this->entityManager
+            ->getRepository(User::class)
+            ->findOneBy(array('username' => 'Louis'));
+
+        $task = $this->entityManager
+            ->getRepository(Task::class)
+            ->findOneBy(array('User' => $user));
+
+        $this->entityManager->close();
+
+        // delete their task and anonymous TASK ( ADMIN )
+        $client->request('GET', '/tasks/'.$task->getId().'/delete');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+    }
+
+
+    public function testTaskDeleteWithUserAdmin(){
+        $client = $this->login('sacha','000000') ;
+
+        //$user = $this->entityManager
+            //->getRepository(User::class)
+            //->findOneBy(array('username' => 'Louis'));
+
+        $task = $this->entityManager
+            ->getRepository(Task::class)
+            ->findOneBy(array('User' => null));
+
+        $this->entityManager->close();
+
+        // delete their task and anonymous TASK ( ADMIN )
+        $client->request('GET', '/tasks/'.$task->getId().'/delete');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+
+    }
+
+
+
+
     public function testTaskToggle(){
-        // task 2
 
         $client = $this->login('sacha','000000') ;
         $client->request('GET', '/tasks/'.$this->searchTasks()->getId().'/toggle');

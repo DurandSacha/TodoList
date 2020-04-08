@@ -49,7 +49,7 @@ class TaskTypeTest extends BaseTest
     }
 
     public function testFormCreateTask(){
-        $client = $this->login('sacha','000000') ;
+        $client = $this->login('Louis','000000') ;
         $crawler = $client->request('GET', '/tasks/create');
 
         $form = $crawler->selectButton('Ajouter')->form();

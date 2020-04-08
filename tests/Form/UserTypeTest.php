@@ -56,35 +56,33 @@ class UserTypeTest extends BaseTest
         $crawler = $client->request('GET', '/users/create');
 
         $form = $crawler->selectButton('Ajouter')->form();
-        $form['user[username]'] = 'UserTest';
+        $form['user[username]'] = 'UserTest'.rand(100,100000000);
         $form['user[password][first]'] = '000000';
         $form['user[password][second]'] = '000000';
-        $form['user[email]'] = 'UserTest@gmail.com';
+        $form['user[email]'] = 'hello'.rand(100,100000000).'@gmail.com';
         $form['user[Roles]'] = 'ROLE_USER';
         $client->submit($form);
-        //$this->assertTrue($client->getResponse()->isRedirection());
+        $this->assertFalse($client->getResponse()->isSuccessful());
 
         //$client->followRedirect();
-        $this->assertTrue($client->getResponse()->isSuccessful());
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
     public function testFormCreateUserPOST(){
         $client = $this->login('sacha','000000') ;
         $crawler = $client->request('POST', '/users/create');
-        //$this->searchAllUser()->count();
+
         $form = $crawler->selectButton('Ajouter')->form();
-        $form['user[username]'] = 'UserTest';
+        $form['user[username]'] = 'UserTest10';
         $form['user[password][first]'] = '000000';
         $form['user[password][second]'] = '000000';
-        $form['user[email]'] = 'UserTest@gmail.com';
+        $form['user[email]'] = 'helloat@gmail.com';
         $form['user[Roles]'] = 'ROLE_USER';
         $client->submit($form);
-        //$this->assertFalse($client->getResponse()->isRedirection());
+        $this->assertTrue($client->getResponse()->isSuccessful());
 
         //$client->followRedirect();
-        //$this->assertTrue($client->getResponse()->isSuccessful());
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
