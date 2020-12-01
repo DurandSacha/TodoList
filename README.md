@@ -1,5 +1,4 @@
 <a href="https://codeclimate.com/github/DurandSacha/todoList/maintainability"><img src="https://api.codeclimate.com/v1/badges/3ca376bb45835a6992c9/maintainability" /></a>
-<a href="https://codeclimate.com/github/DurandSacha/todoList/test_coverage"><img src="https://api.codeclimate.com/v1/badges/3ca376bb45835a6992c9/test_coverage" /></a>
 <br/>
 
 -----------------
